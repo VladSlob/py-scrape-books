@@ -49,14 +49,3 @@ class BooksSpider(scrapy.Spider):
         except (AttributeError, IndexError, ValueError):
             amount_in_stock = 0
 
-        yield {
-            "title": response.meta["title"],
-            "price": response.meta["price"],
-            "amount_in_stock": amount_in_stock,
-            "rating": response.meta["rating"],
-            "description": response.css(
-                "#product_description + p::text").get(),
-            "upc": response.css("th:contains('UPC') + td::text").get(
-                default="No description available"
-            )
-        }
